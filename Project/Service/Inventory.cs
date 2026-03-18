@@ -53,5 +53,17 @@ public class Inventory
         }
         return null;
     }
+
+    public void MakeAvailable(int equipmentId)
+    {
+        foreach (var equipment in _equipmentList)
+        {
+            if (equipment.Id == equipmentId)
+            {
+                equipment.IsAvailable = true;
+                break;
+            }
+        }
+    }
     
 }
