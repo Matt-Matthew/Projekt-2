@@ -15,7 +15,7 @@ public class UserService
     {
         foreach (var user in _users)
         {
-            Console.WriteLine($"Id: {user.Id} Name: {user.Name} , Email: {user.Email}");
+            Console.WriteLine($"Id: {user.Id} Name: {user.Name} , LastName {user.LastName} ,Email: {user.Email}");
         }
     }
     
