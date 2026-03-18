@@ -1,6 +1,6 @@
 namespace Project.Model;
 
-public class Equipment
+public abstract class Equipment
 {
     private static int _nextId = 1;
     public int Id { get; set; }
