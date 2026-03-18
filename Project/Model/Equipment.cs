@@ -10,7 +10,7 @@ public abstract class Equipment
     public Equipment()
     {
         Id = _nextId;
-        Id = _nextId++;
+        _nextId++;
     }
     
 }
