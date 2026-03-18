@@ -18,4 +18,16 @@ public class UserService
             Console.WriteLine($"Id: {user.Id} Name: {user.Name} , Email: {user.Email}");
         }
     }
+    
+    public User GetUserById(int userId)
+    {
+        foreach (var user in _users)
+        {
+            if (userId == user.Id)
+            {
+                return user;
+            }
+        }
+        return null;
+    }
 }
