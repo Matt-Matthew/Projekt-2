@@ -89,4 +89,65 @@ public class RentalService
         }
         _inventory.MakeAvailable(equipmentId);
     }
+
+    public void DisplayActiveRentals(int userId)
+    {
+        Console.WriteLine("Active rentals for user " + userId );
+        bool found = false;
+        foreach (var rental in _rentals)
+        {
+            if (rental.Rent.Id == userId && rental.ActualReturn == null)
+            {
+                Console.WriteLine($"Equipment: {rental.RentedItem.Name} , DateRent: {rental.DateRent} , DateReturn: {rental.DateReturn}");
+                found = true;
+            }
+        }
+
+        if (!found)
+        {
+            Console.WriteLine("No active rentals");
+        }
+    }
+
+    public void DisplayLateRentals()
+    {
+        Console.WriteLine("Late rentals");
+        bool found = false;
+        foreach (var rental in _rentals)
+        {
+            if (rental.ActualReturn == null && DateTime.Now > rental.DateReturn)
+            {
+                int lateDays = (DateTime.Now - rental.DateReturn).Days;
+                Console.WriteLine(
+                    $"Equipment: {rental.RentedItem.Name} , DateRent: {rental.DateRent} , DateReturn: {rental.DateReturn} , Late days: {lateDays}");
+                found = true;
+            }
+        }
+
+        if (!found)
+        {
+            Console.WriteLine("No late rentals");
+        }
+    }
+
+    public void GenerateReport()
+    {
+        Console.WriteLine("Generating report");
+        int totalRentals = _rentals.Count;
+        int activeRentals = 0;
+        decimal feesCount = 0;
+        
+        foreach (var rental in _rentals)
+        {
+            if (rental.ActualReturn == null)
+            {
+                activeRentals++;
+            }
+            else
+            {
+                feesCount += rental.AdditionalFee; 
+            }
+        }
+        Console.WriteLine($"Total rentals: {totalRentals} , Active rentals: {activeRentals} , Fees: {feesCount}");
+    }
 }
